@@ -62,18 +62,7 @@ class MenuItemResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->searchable(),
-                ImageColumn::make('photo')
-                ->label('Photo')
-                ->getStateUsing(function ($record) {
-                    $disk = config('filament.uploads_disk');
-                    $path = $record->photo;
-
-                    if ($path && Storage::disk($disk)->exists($path)) {
-                        return Storage::disk($disk)->url($path);
-                    }
-
-                    return asset('images/default.jpg');
-                }),
+                ImageColumn::make('photo'),
                 TextColumn::make('category.name')->label('Category'),
                 TextColumn::make('tab.menu')->label('Tab'),
                 TextColumn::make('price')->money('THB'),
